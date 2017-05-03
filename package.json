@@ -1,6 +1,6 @@
 {
   "name": "ts-transform-system-import",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Transform System.import in TS to Promise-wrapped require",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
