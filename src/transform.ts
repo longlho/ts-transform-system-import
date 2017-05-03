@@ -19,8 +19,8 @@ function getRequirePath (node: ts.Node): string {
         node.kind !== ts.SyntaxKind.CallExpression ||
         !(expression = ((node as ts.CallExpression).expression as ts.PropertyAccessExpression)) ||
         expression.kind !== ts.SyntaxKind.PropertyAccessExpression ||
-        expression.expression.getText() !== 'System' ||
-        expression.name.getText() !== 'import'
+        expression.expression.text !== 'System' ||
+        expression.name.text !== 'import'
     ) {
         return null
     }
