@@ -17,19 +17,21 @@ function getRequirePath(node) {
  * @param path
  */
 function createPromisifiedRequire(path) {
-    const node = ts.createNode(ts.SyntaxKind.ExpressionStatement);
-    node.expression = ts.createNode(ts.SyntaxKind.CallExpression);
-    const promiseNode = node.expression.expression = ts.createNode(ts.SyntaxKind.PropertyAccessExpression);
+    const node = ts.createNode(ts.SyntaxKind.CallExpression);
+    // Create Require Node
+    const requireNode = ts.createNode(ts.SyntaxKind.CallExpression);
+    requireNode.expression = ts.createNode(ts.SyntaxKind.Identifier);
+    requireNode.expression.text = 'require';
+    requireNode.arguments = [ts.createNode(ts.SyntaxKind.Identifier)];
+    requireNode.arguments[0].text = path;
+    // Create promise node
+    const promiseNode = ts.createNode(ts.SyntaxKind.PropertyAccessExpression);
     promiseNode.expression = ts.createNode(ts.SyntaxKind.Identifier);
     promiseNode.expression.text = 'Promise';
     promiseNode.name = ts.createNode(ts.SyntaxKind.Identifier);
     promiseNode.name.text = 'resolve';
-    const arg = ts.createNode(ts.SyntaxKind.CallExpression);
-    arg.expression = ts.createNode(ts.SyntaxKind.Identifier);
-    arg.expression.text = 'require';
-    arg.arguments = [ts.createNode(ts.SyntaxKind.Identifier)];
-    arg.arguments[0].text = path;
-    node.expression.arguments.push(arg);
+    node.expression = promiseNode;
+    node.arguments = [requireNode];
     return node;
 }
 function default_1() {
