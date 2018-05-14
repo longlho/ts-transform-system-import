@@ -1,4 +1,5 @@
 # ts-transform-system-import
+## [DEPRECATED] Please use ES6 `import` instead. This plugin is only for backwards compatibility.
 Transform `System.import` in TS to Promise-wrapped require
 
 
